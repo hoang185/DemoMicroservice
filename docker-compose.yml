@@ -13,9 +13,10 @@ services:
     networks:
       - backend
     ports:
-      - 18001:1433
+      - 8001:1433
 
   customerwebapi:
+    container_name: customer-api
     image: ${DOCKER_REGISTRY-}customerwebapi
     build:
       context: .
@@ -23,12 +24,35 @@ services:
     networks: 
       - backend
     ports:
-      - 18002:80
- 
+      - 8002:80
     environment:
-      - DB_HOST=a055a805c5d3
+      - DB_HOST=bc686349b405
       - DB_NAME=dms_customer
       - DB_SA_PASSWORD=123456789@
-  
 
+  productdb:
+    container_name: product-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment: 
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=123456789@
+    networks:
+      - backend
+    ports:
+      - 8003:1433
+ 
+  productwebapi:
+    container_name: product-api
+    image: ${DOCKER_REGISTRY-}productwebapi
+    build:
+      context: .
+      dockerfile: ProductWebApi/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8005:80
+    environment:
+      - DB_HOST=a9a950cc85f5
+      - DB_NAME=dms_product
+      - DB_SA_PASSWORD=123456789@
 
