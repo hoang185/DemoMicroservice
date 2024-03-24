@@ -2,6 +2,7 @@ version: '3.4'
 
 networks:
   backend:
+  frontend:
 
 services:
   customerdb:
@@ -13,7 +14,7 @@ services:
     networks:
       - backend
     ports:
-      - 8001:1433
+      - 18001:1433
 
   customerwebapi:
     container_name: customer-api
@@ -23,10 +24,8 @@ services:
       dockerfile: CustomerWebApi\Dockerfile
     networks: 
       - backend
-    ports:
-      - 8002:80
     environment:
-      - DB_HOST=bc686349b405
+      - DB_HOST=f445bc8424f0
       - DB_NAME=dms_customer
       - DB_SA_PASSWORD=123456789@
 
@@ -39,7 +38,7 @@ services:
     networks:
       - backend
     ports:
-      - 8003:1433
+      - 18003:1433
  
   productwebapi:
     container_name: product-api
@@ -49,10 +48,32 @@ services:
       dockerfile: ProductWebApi/Dockerfile
     networks:
       - backend
-    ports:
-      - 8005:80
     environment:
-      - DB_HOST=a9a950cc85f5
+      - DB_HOST=77ad7129fd53
       - DB_NAME=dms_product
       - DB_SA_PASSWORD=123456789@
+
+  apigateway:
+    container_name: api-gateway
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+      - 8001:80
+    networks:
+      - backend
+      - frontend
+
+
+  blazorserverwebui:
+    container_name: blazor-web-ui
+    image: ${DOCKER_REGISTRY-}blazorserverwebui
+    build:
+      context: .
+      dockerfile: BlazorServerWebUI/Dockerfile
+    ports:
+      - 8002:80
+    networks:
+      - frontend
 

@@ -5,7 +5,9 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "customerwebapi": "StartDebugging",
-        "productwebapi": "StartDebugging"
+        "productwebapi": "StartDebugging",
+        "apigateway": "StartDebugging",
+        "blazorserverwebui": "StartDebugging"
       }
     }
   }
