@@ -38,7 +38,7 @@ services:
     networks:
       - backend
     ports:
-      - 18003:1433
+      - 18001:1433
  
   productwebapi:
     container_name: product-api
