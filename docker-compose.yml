@@ -5,16 +5,6 @@ networks:
   frontend:
 
 services:
-  customerdb:
-    container_name: customer-db
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    environment: 
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=123456789@
-    networks:
-      - backend
-    ports:
-      - 18001:1433
 
   customerwebapi:
     container_name: customer-api
@@ -25,12 +15,12 @@ services:
     networks: 
       - backend
     environment:
-      - DB_HOST=f445bc8424f0
+      - DB_HOST=productdb
       - DB_NAME=dms_customer
       - DB_SA_PASSWORD=123456789@
 
   productdb:
-    container_name: product-db
+    container_name: productdb
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment: 
       - ACCEPT_EULA=Y
@@ -49,7 +39,7 @@ services:
     networks:
       - backend
     environment:
-      - DB_HOST=77ad7129fd53
+      - DB_HOST=productdb
       - DB_NAME=dms_product
       - DB_SA_PASSWORD=123456789@
 
