@@ -17,14 +17,14 @@ services:
     environment:
       - DB_HOST=productdb
       - DB_NAME=dms_customer
-      - DB_SA_PASSWORD=123456789@
+      - DB_SA_PASSWORD=Hoangvu123@
 
   productdb:
     container_name: productdb
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment: 
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=123456789@
+      - SA_PASSWORD=Hoangvu123@
     networks:
       - backend
     ports:
@@ -41,7 +41,7 @@ services:
     environment:
       - DB_HOST=productdb
       - DB_NAME=dms_product
-      - DB_SA_PASSWORD=123456789@
+      - DB_SA_PASSWORD=Hoangvu123@
 
   apigateway:
     container_name: api-gateway
